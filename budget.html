@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Budget App</title>
+    <link rel="stylesheet" href="./budget.css" />
+  </head>
+  <body>
+    <h1>Budget App</h1>
+    <form>
+      <label for="name">Name:</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        placeholder="Enter your name"
+        required
+      />
+
+      <label for="age">Age:</label>
+      <input
+        type="number"
+        id="age"
+        name="age"
+        placeholder="Enter your age"
+        required
+      />
+
+      <button id="submit" type="submit">Submit</button>
+    </form>
+    <div id="greetUser"></div>
+    <table hidden>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Health</td>
+          <td>
+            <input
+              type="number"
+              class="price-input"
+              min="0"
+              placeholder="Enter amount"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Groceries</td>
+          <td>
+            <input
+              type="number"
+              class="price-input"
+              min="0"
+              placeholder="Enter amount"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Housing</td>
+          <td>
+            <input
+              type="number"
+              class="price-input"
+              min="0"
+              placeholder="Enter amount"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Pets</td>
+          <td>
+            <input
+              type="number"
+              class="price-input"
+              min="0"
+              placeholder="Enter amount"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Food</td>
+          <td>
+            <input
+              type="number"
+              class="price-input"
+              min="0"
+              placeholder="Enter amount"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Car Insurance</td>
+          <td>
+            <input
+              type="number"
+              class="price-input"
+              min="0"
+              placeholder="Enter amount"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Subscriptions</td>
+          <td>
+            <input
+              type="number"
+              class="price-input"
+              min="0"
+              placeholder="Enter amount"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Clothes</td>
+          <td>
+            <input
+              type="number"
+              class="price-input"
+              min="0"
+              placeholder="Enter amount"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Gas</td>
+          <td>
+            <input
+              type="number"
+              class="price-input"
+              min="0"
+              placeholder="Enter amount"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>Internet</td>
+          <td>
+            <input
+              type="number"
+              class="price-input"
+              min="0"
+              placeholder="Enter amount"
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="total-container" hidden>
+      <button id="calculateButton">Calculate Total</button>
+      <span class="total-display" id="totalDisplay">Total: $0.0</span>
+    </div>
+    <script src="./budget.js"></script>
+  </body>
+</html>

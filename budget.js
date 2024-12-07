@@ -31,43 +31,60 @@ document.querySelector("#submit").addEventListener("click", function (event) {
     greeting.innerText = "";
   }
 });
-// Create custom input
-const tbodyEl = document.querySelector("tbody");
-const inputEl = document.createElement("input");
-const td1El = document.createElement("td");
-const td2El = document.createElement("td");
-const trEl = document.createElement("tr");
-const customItemInput = document.createElement("input");
 
-// Set multiple attributes
-const attributes = {
-  type: "number",
-  class: "price-input",
-  min: "0",
-  placeholder: "Enter amount",
-};
+// This function create custom input with the same attributes as the original ones in the html file,
+// and a button
 
-Object.entries(attributes).forEach(([key, value]) => {
-  inputEl.setAttribute(key, value);
-});
+function customItem() {
+  const tbodyEl = document.querySelector("tbody");
+  const inputEl = document.createElement("input");
+  const td1El = document.createElement("td");
+  const td2El = document.createElement("td");
+  const td3El = document.createElement("td");
+  const trEl = document.createElement("tr");
+  const addItemButton = document.createElement("button");
+  const customItemInput = document.createElement("input");
 
-// customItemInput.setAttribute("type", "text");
-// customItemInput.setAttribute("placeholder", "Enter other item");
+  // Set multiple attributes
+  const attributes = {
+    type: "number",
+    class: "price-input",
+    min: "0",
+    placeholder: "Enter amount",
+  };
 
-const { type, placeholder } = attributes;
+  Object.entries(attributes).forEach(([key, value]) => {
+    inputEl.setAttribute(key, value);
+  });
 
-customItemInput.type = "text";
-customItemInput.placeholder = "Enter new Item";
+  //const { type, placeholder } = attributes;
 
-tbodyEl.appendChild(trEl).appendChild(td1El).appendChild(customItemInput);
+  customItemInput.type = "text";
+  customItemInput.placeholder = "Enter new Item";
 
-tbodyEl.appendChild(trEl).appendChild(td2El).appendChild(inputEl);
+  addItemButton.textContent = "Add Item";
+  addItemButton.className = "addItem";
+
+  const previousAddButton = tbodyEl.querySelector(".addItem:last-child");
+  //console.log(previousAddButton);
+  if (previousAddButton) {
+    previousAddButton.parentElement.remove();
+  }
+
+  // Add event listener to the new button
+  addItemButton.addEventListener("click", customItem);
+
+  trEl.appendChild(td3El).appendChild(addItemButton);
+
+  tbodyEl.appendChild(trEl).appendChild(td1El).appendChild(customItemInput);
+
+  tbodyEl.appendChild(trEl).appendChild(td2El).appendChild(inputEl);
+}
 
 const calculateButton = document.querySelector("#calculateButton");
-const totalDisplay = document.querySelector("#totalDisplay");
-const priceInput = document.querySelectorAll(".price-input");
-
 function calculateTotal() {
+  const totalDisplay = document.querySelector("#totalDisplay");
+  const priceInput = document.querySelectorAll(".price-input");
   let total = 0;
   priceInput.forEach((input) => {
     const value = parseFloat(input.value);
@@ -77,4 +94,8 @@ function calculateTotal() {
   });
   totalDisplay.innerText = `Total: $${total.toFixed(2)}`;
 }
+
+customItem();
 calculateButton.addEventListener("click", calculateTotal);
+
+// Add an event listener on that button to show new item and amount field to the user

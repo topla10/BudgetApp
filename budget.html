@@ -26,6 +26,14 @@
         placeholder="Enter your age"
         required
       />
+      <label for="income">Income:</label>
+      <input
+        type="number"
+        id="income"
+        name="income"
+        placeholder="Enter your income"
+        required
+      />
 
       <button id="submit" type="submit">Submit</button>
     </form>
@@ -34,7 +42,7 @@
       <thead>
         <tr>
           <th>Item</th>
-          <th>Price</th>
+          <th>Amount($$$)</th>
         </tr>
       </thead>
       <tbody>
@@ -152,7 +160,9 @@
     </table>
     <div class="total-container" hidden>
       <button id="calculateButton">Calculate Total</button>
-      <span class="total-display" id="totalDisplay">Total: $0.0</span>
+      <span class="total-display" id="totalDisplay">Total: $0.0</span> <br />
+      <button id="reportButton">Report</button>
+      <div class="percentage-display" id="percentage">Percentage: 0.0%</div>
     </div>
     <script src="./budget.js"></script>
   </body>

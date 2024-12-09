@@ -24,15 +24,26 @@ const validateform = function () {
 
 // form Input declaration variables
 
-let userName = "";
 let age = 0;
 let income = 0;
 
 document.querySelector("#submit").addEventListener("click", function (event) {
   const greeting = document.querySelector("#greetUser");
+
+  // Use of local storage to store the form inputs in the browser.
+
   userName = document.querySelector("#name").value.trim();
+  localStorage.setItem("userName", userName);
+  localStorage.getItem("userName");
+
   age = parseInt(document.querySelector("#age").value.trim());
+  localStorage.setItem("age", age);
+  localStorage.getItem("age");
+
   income = parseInt(document.querySelector("#income").value.trim());
+  localStorage.setItem("income", income);
+  localStorage.getItem("income");
+
   event.preventDefault();
 
   const isValid = validateform();

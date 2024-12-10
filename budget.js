@@ -6,16 +6,16 @@ const validateform = function () {
     alert("Invalid name. Please use only letters, spaces, and/or hyphens.");
     return false;
   }
-  if (age <= 0) {
+  if (!age || age <= 0) {
     alert(" Invalid input. Age cannot be negative or zero.");
     return false;
   }
 
-  if (age > 0 && age < 5) {
+  if (!age || (age > 0 && age < 5)) {
     alert("Too Young to budget, must be at leat 5 years old.");
     return false;
   }
-  if (income <= 0) {
+  if (!income || income <= 0) {
     alert(" Invalid input. Income cannot be negative or zero.");
     return false;
   }
@@ -99,9 +99,15 @@ function customItem() {
   // Add event listener to the new button
   addItemButton.addEventListener("click", customItem);
 
-  trEl.appendChild(td3El).appendChild(addItemButton);
-  tbodyEl.appendChild(trEl).appendChild(td1El).appendChild(customItemInput);
-  tbodyEl.appendChild(trEl).appendChild(td2El).appendChild(inputEl);
+  td1El.appendChild(customItemInput);
+  td2El.appendChild(inputEl);
+  td3El.appendChild(addItemButton);
+
+  trEl.appendChild(td1El);
+  trEl.appendChild(td2El);
+  trEl.appendChild(td3El);
+
+  tbodyEl.appendChild(trEl);
 }
 
 // const calculateButton = document.querySelector("#calculateButton");
@@ -126,33 +132,48 @@ function calcPercentage() {
   percentageDisplay.innerHTML = "";
 
   const priceInput = document.querySelectorAll(".price-input");
-  let percentage = 0;
 
-  // Convert nodeListe into an array of numbers
-  // const priceInputArray = Array.from(priceInput).map((input) => {
-  //   return parseFloat(input.value);
-  // });
-  const priceInputArray = Array.from(priceInput)
-    .map((input) => parseFloat(input.value))
-    .filter((value) => !isNaN(value));
+  // Select all the input fields and its corresponding first td elements
+  const rows = document.querySelectorAll("table tbody tr");
+  const priceInputs = document.querySelectorAll(".price-input");
 
-  priceInputArray.forEach((value, index) => {
-    if (!isNaN(value) && value >= 0) {
-      percentage = (value * 100) / income;
-      const resultItem = document.createElement("div");
-      resultItem.innerText = `Input ${
-        index + 1
-      } represents ${percentage.toFixed(2)}% of your income.`;
-      percentageDisplay.appendChild(resultItem);
+  // Iterate over the rows
+  rows.forEach((row) => {
+    // Get the first <td> (item name)
+    //const itemName = row.querySelector("td:first-child")?.textContent.trim();
+
+    const itemNameElement = row.querySelector("td:first-child");
+
+    // Retrieve the value of the input field dynamically
+    let itemName = itemNameElement.querySelector("input")
+      ? itemNameElement.querySelector("input").value.trim()
+      : itemNameElement.textContent.trim();
+
+    // Get the input element in the row
+    const inputElement = row.querySelector(".price-input");
+
+    if (itemName && inputElement) {
+      const value = parseFloat(inputElement.value);
+
+      if (!isNaN(value) && value >= 0) {
+        const percentage = (value * 100) / income;
+
+        // Create the result item
+        const resultItem = document.createElement("div");
+        resultItem.innerText = `${itemName} represents ${percentage.toFixed(
+          2
+        )}% of your income.`;
+        percentageDisplay.appendChild(resultItem);
+      }
     }
   });
 
   // Get the largest number
-  const largest = Math.max(...priceInputArray);
+  const largest = Math.max(...priceInputs);
   console.log(largest);
 
   // Get the minimum number
-  const mminimum = Math.min(...priceInputArray);
+  const mminimum = Math.min(...priceInput);
   console.log(mminimum);
 }
 

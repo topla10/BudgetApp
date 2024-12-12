@@ -55,6 +55,8 @@ document.querySelector("#submit").addEventListener("click", function (event) {
   } else {
     greeting.innerText = "";
   }
+  //  Change the size of the fixed element (The total)
+  setTimeout(totlaSizeChange, 3000);
 });
 
 // This function create custom input with the same attributes as the original ones in the html file,
@@ -110,7 +112,12 @@ function customItem() {
   tbodyEl.appendChild(trEl);
 }
 
-// const calculateButton = document.querySelector("#calculateButton");
+function totlaSizeChange() {
+  document.querySelector(".fixed").style.fontSize = "x-large";
+  document.querySelector(".fixed").style.backgroundImage =
+    "linear-gradient(grey, white)";
+}
+
 function calculateTotal() {
   const priceInput = document.querySelectorAll(".price-input");
   const totalDisplay = document.querySelector("#totalDisplay");
@@ -131,17 +138,12 @@ function calcPercentage() {
   // Clear the display container to avoid duplication
   percentageDisplay.innerHTML = "";
 
-  const priceInput = document.querySelectorAll(".price-input");
-
   // Select all the input fields and its corresponding first td elements
   const rows = document.querySelectorAll("table tbody tr");
-  const priceInputs = document.querySelectorAll(".price-input");
 
   // Iterate over the rows
   rows.forEach((row) => {
     // Get the first <td> (item name)
-    //const itemName = row.querySelector("td:first-child")?.textContent.trim();
-
     const itemNameElement = row.querySelector("td:first-child");
 
     // Retrieve the value of the input field dynamically
@@ -167,17 +169,9 @@ function calcPercentage() {
       }
     }
   });
-
-  // Get the largest number
-  const largest = Math.max(...priceInputs);
-  console.log(largest);
-
-  // Get the minimum number
-  const mminimum = Math.min(...priceInput);
-  console.log(mminimum);
 }
-
 customItem();
+
 document
   .querySelector("#calculateButton")
   .addEventListener("click", calculateTotal);
